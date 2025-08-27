@@ -6,8 +6,12 @@
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Image</th>
             <th scope="col">Title</th>
             <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
             <th scope="col">Category</th>
         </tr>
     </thead>
@@ -16,9 +20,36 @@
         {
             <tr>
                 <th scope="row">@i.Id</th>
+                <td>
+                    <img src="@(i.ImageUrl ?? "https://thumbs.dreamstime.com/b/no-image-icon-vector-available-picture-symbol-isolated-white-background-suitable-user-interface-element-205805243.jpg")" alt="@i.Title" height="50" />
+                </td>
                 <td>@i.Title</td>
-                <td>@i.Price$</td>
+                <td>
+                    @if (i.Discount > 0)
+                    {
+                        <span class="text-decoration-line-through">@i.Price$</span>
+                        <span class="ms-2">@((i.Price * (100 - i.Discount)) / 100)$</span>
+                    }
+                    else
+                    {
+                        <span>@i.Price$</span>
+                    }
+
+                </td>
                 <td>@i.Category</td>
+                <td>@i.Quantity</td>
+                <td>
+                    @if(i.Quantity > 0)
+                    {
+                        <span class="badge bg-success">In Stock</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Out of Stock</span>
+                    }
+                </td>
+                @* TODO: show category name *@
+                <td>@i.Category</td> 
             </tr>
         }
     </tbody>
