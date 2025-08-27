@@ -13,12 +13,13 @@
             <th scope="col">Quantity</th>
             <th scope="col">Status</th>
             <th scope="col">Category</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var i in Model)
         {
-            <tr>
+            <tr class="align-middle">
                 <th scope="row">@i.Id</th>
                 <td>
                     <img src="@(i.ImageUrl ?? "https://thumbs.dreamstime.com/b/no-image-icon-vector-available-picture-symbol-isolated-white-background-suitable-user-interface-element-205805243.jpg")" alt="@i.Title" height="50" />
@@ -49,7 +50,10 @@
                     }
                 </td>
                 @* TODO: show category name *@
-                <td>@i.Category</td> 
+                <td>@i.Category</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@i.Id" class="btn btn-outline-danger">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

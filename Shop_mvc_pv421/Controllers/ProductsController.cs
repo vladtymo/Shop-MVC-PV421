@@ -17,5 +17,16 @@ namespace Shop_mvc_pv421.Controllers
 
             return View(model);
         }
+
+        public IActionResult Delete(int id)
+        {
+            var product = ctx.Products.Find(id);
+            if (product == null) return NotFound();
+
+            ctx.Products.Remove(product);
+            ctx.SaveChanges(); // submit changes to DB
+
+            return RedirectToAction("Index");
+        }
     }
 }
