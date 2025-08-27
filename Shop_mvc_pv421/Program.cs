@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Shop_mvc_pv421.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+string connStr = builder.Configuration.GetConnectionString("ConnStr") 
+    ?? throw new Exception("No Connection String found.");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ShopDbContext>(options =>
+    options.UseSqlServer(connStr));
 
 var app = builder.Build();
 
