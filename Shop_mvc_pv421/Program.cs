@@ -3,7 +3,7 @@ using Shop_mvc_pv421.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string connStr = builder.Configuration.GetConnectionString("ConnStr") 
+string connStr = builder.Configuration.GetConnectionString("RemoteDb") 
     ?? throw new Exception("No Connection String found.");
 
 // Add services to the container.
