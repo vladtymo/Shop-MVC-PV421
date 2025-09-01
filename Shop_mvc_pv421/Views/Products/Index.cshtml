@@ -54,7 +54,10 @@
                 </td>
                 @* TODO: show category name *@
                 <td>
-                    <a asp-action="Delete" asp-route-id="@i.Id" class="btn btn-outline-danger">Delete</a>
+                    <div class="btn-group" role="group">
+                        <a asp-action="Edit" asp-route-id="@i.Id" class="btn btn-outline-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@i.Id" class="btn btn-outline-danger">Delete</a>
+                    </div>
                 </td>
             </tr>
         }
