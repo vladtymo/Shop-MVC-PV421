@@ -30,6 +30,11 @@ namespace Shop_mvc_pv421.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             ctx.Products.Add(product);
             ctx.SaveChanges();
             
