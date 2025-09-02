@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Shop_mvc_pv421.Data;
+using AnimalShelter.Data;
 
 #nullable disable
 
-namespace Shop_mvc_pv421.Migrations
+namespace AnimalShelter.Migrations
 {
-    [DbContext(typeof(ShopDbContext))]
-    [Migration("20250825160331_InsertData")]
-    partial class InsertData
+    [DbContext(typeof(AnimalShelterDbContext))]
+    [Migration("20250901170516_Test")]
+    partial class Test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,7 +100,8 @@ namespace Shop_mvc_pv421.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
 
                     b.Property<int>("Discount")
                         .HasColumnType("int");

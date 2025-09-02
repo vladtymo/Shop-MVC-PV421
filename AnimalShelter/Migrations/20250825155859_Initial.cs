@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Shop_mvc_pv421.Migrations
+namespace AnimalShelter.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Shop_mvc_pv421.Migrations
+namespace AnimalShelter.Migrations
 {
     /// <inheritdoc />
     public partial class InsertData : Migration

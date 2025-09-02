@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shop_mvc_pv421.Data;
-using Shop_mvc_pv421.Data.Entities;
+using AnimalShelter.Data;
+using AnimalShelter.Data.Entities;
 
-namespace Shop_mvc_pv421.Controllers
+namespace AnimalShelter.Controllers
 {
-    public class ProductsController : Controller
+    public class AnimalsController : Controller
     {
-        private readonly ShopDbContext ctx;
+        private readonly AnimalShelterDbContext ctx;
 
-        public ProductsController(ShopDbContext ctx)
+        public AnimalsController(AnimalShelterDbContext ctx)
         {
             this.ctx = ctx;
         }
         public IActionResult Index()
         {
             // LEFT JOIN
-            var model = ctx.Products.Include(x => x.Category).ToList();
+            var model = ctx.Animals.Include(x => x.Category).ToList();
 
             return View(model);
         }
@@ -24,18 +24,20 @@ namespace Shop_mvc_pv421.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Categories = ctx.Categories.ToList();
             return View();
         }
         
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(Animal animal)
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Categories = ctx.Categories.ToList();
                 return View();
             }
 
-            ctx.Products.Add(product);
+            ctx.Animals.Add(animal);
             ctx.SaveChanges();
             
             return RedirectToAction("Index");
@@ -44,21 +46,23 @@ namespace Shop_mvc_pv421.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var product = ctx.Products.Find(id);
-            if (product == null) return NotFound();
+            var animal = ctx.Animals.Find(id);
+            if (animal == null) return NotFound();
 
-            return View(product);
+            ViewBag.Categories = ctx.Categories.ToList();
+            return View(animal);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(Animal animal)
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Categories = ctx.Categories.ToList();
                 return View();
             }
 
-            ctx.Products.Update(product);
+            ctx.Animals.Update(animal);
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
@@ -66,10 +70,10 @@ namespace Shop_mvc_pv421.Controllers
 
         public IActionResult Delete(int id)
         {
-            var product = ctx.Products.Find(id);
-            if (product == null) return NotFound();
+            var animal = ctx.Animals.Find(id);
+            if (animal == null) return NotFound();
 
-            ctx.Products.Remove(product);
+            ctx.Animals.Remove(animal);
             ctx.SaveChanges(); // submit changes to DB
 
             return RedirectToAction("Index");

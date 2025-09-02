@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Shop_mvc_pv421.Data;
+using AnimalShelter.Data;
 
 #nullable disable
 
-namespace Shop_mvc_pv421.Migrations
+namespace AnimalShelter.Migrations
 {
-    [DbContext(typeof(ShopDbContext))]
+    [DbContext(typeof(AnimalShelterDbContext))]
     [Migration("20250825155859_Initial")]
     partial class Initial
     {

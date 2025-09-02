@@ -1,20 +1,20 @@
-﻿@model List<Product>
+﻿@model List<Animal>
 
-<h1>Products List</h1>
+<h1>Список тварин у притулку</h1>
 
-<a asp-action="Create" class="btn btn-primary my-1">Create New Product</a>
+<a asp-action="Create" class="btn btn-primary my-1">Додати нову тварину</a>
 
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Image</th>
-            <th scope="col">Title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Category</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Status</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Фото</th>
+            <th scope="col">Ім'я</th>
+            <th scope="col">Вік</th>
+            <th scope="col">Стать</th>
+            <th scope="col">Категорія</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Дії</th>
         </tr>
     </thead>
     <tbody>
@@ -23,40 +23,41 @@
             <tr class="align-middle">
                 <th scope="row">@i.Id</th>
                 <td class="grid-item-main-image">
-                    <img src="@(i.ImageUrl ?? "https://thumbs.dreamstime.com/b/no-image-icon-vector-available-picture-symbol-isolated-white-background-suitable-user-interface-element-205805243.jpg")" alt="@i.Title" height="50" />
+                    <img src="@(i.ImageUrl ?? "https://thumbs.dreamstime.com/b/no-image-icon-vector-available-picture-symbol-isolated-white-background-suitable-user-interface-element-205805243.jpg")" alt="@i.Name" height="50" />
                 </td>
                 <td>
-                    <a href="#">@i.Title</a>
+                    <a href="#">@i.Name</a>
                 </td>
                 <td>
-                    @if (i.Discount > 0)
+                    @if (i.Age == 0)
                     {
-                        <span class="text-decoration-line-through">@i.Price$</span>
-                        <span class="ms-1">@((i.Price * (100 - i.Discount)) / 100)$</span>
+                        <span>Менше року</span>
                     }
                     else
                     {
-                        <span>@i.Price$</span>
+                        <span>@i.Age років</span>
                     }
-
                 </td>
+                <td>@i.Gender</td>
                 <td>@i.Category?.Name</td>
-                <td>@i.Quantity</td>
                 <td>
-                    @if (i.Quantity > 0)
+                    @if (i.Status == "Доступний")
                     {
-                        <span class="badge bg-success">In Stock</span>
+                        <span class="badge bg-success">@i.Status</span>
+                    }
+                    else if (i.Status == "Зарезервований")
+                    {
+                        <span class="badge bg-warning">@i.Status</span>
                     }
                     else
                     {
-                        <span class="badge bg-secondary">Out of Stock</span>
+                        <span class="badge bg-secondary">@i.Status</span>
                     }
                 </td>
-                @* TODO: show category name *@
                 <td>
                     <div class="btn-group" role="group">
-                        <a asp-action="Edit" asp-route-id="@i.Id" class="btn btn-outline-warning">Edit</a>
-                        <a data-bs-id="@i.Id" data-bs-title="@i.Title" data-bs-toggle="modal" data-bs-target="#deleteConfirmDialog" class="btn btn-outline-danger">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@i.Id" class="btn btn-outline-warning">Редагувати</a>
+                        <a data-bs-id="@i.Id" data-bs-title="@i.Name" data-bs-toggle="modal" data-bs-target="#deleteConfirmDialog" class="btn btn-outline-danger">Видалити</a>
                     </div>
                 </td>
             </tr>
@@ -79,11 +80,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Do you want to delete <b class="title"></b> product?</p>
+                <p>Ви впевнені, що хочете видалити тварину <b class="title"></b>?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <a id="deleteBtn" class="btn btn-danger">Yes</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ні</button>
+                <a id="deleteBtn" class="btn btn-danger">Так</a>
             </div>
         </div>
     </div>
@@ -108,7 +109,7 @@
             // --- id
             var id = button.getAttribute('data-bs-id')
             var deleteBtn = modal.querySelector('.modal #deleteBtn')
-            deleteBtn.setAttribute('href', "/products/delete/" + id)
+            deleteBtn.setAttribute('href', "/animals/delete/" + id)
         })
 
     </script>

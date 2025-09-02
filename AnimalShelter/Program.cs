@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Shop_mvc_pv421.Data;
+using AnimalShelter.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,7 @@ string connStr = builder.Configuration.GetConnectionString("RemoteDb")
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<ShopDbContext>(options =>
+builder.Services.AddDbContext<AnimalShelterDbContext>(options =>
     options.UseSqlServer(connStr));
 
 var app = builder.Build();
