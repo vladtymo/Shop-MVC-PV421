@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Shop_mvc_pv421.Data;
 using Shop_mvc_pv421.Models;
 using System.Diagnostics;
 
@@ -6,13 +8,17 @@ namespace Shop_mvc_pv421.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly ShopDbContext ctx;
+
+        public HomeController(ShopDbContext ctx)
         {
+            this.ctx = ctx;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = ctx.Products.Include(x => x.Category).ToList();
+            return View(products);
         }
 
         public IActionResult About()
