@@ -27,7 +27,14 @@
     </div>
     <div class="col-md-8">
         <label asp-for="CategoryId" class="form-label">Category Id</label>
-        <input asp-for="CategoryId" type="number" class="form-control" placeholder="Enter category ID">
+        @* <input asp-for="CategoryId" type="number" class="form-control" placeholder="Enter category ID"> *@
+        <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-select">
+            <option disabled selected>Choose category...</option>
+           @*<option value="1">Electronis</option>
+            <option value="2">Home</option>
+            <option value="3">Kids</option>
+            <option value="4">Sport</option>*@
+        </select>
         <span asp-validation-for="CategoryId" class="small text-danger"></span>
     </div>
     <div class="col-md-12">
@@ -40,14 +47,6 @@
         <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter description"></textarea>
         <span asp-validation-for="Description" class="small text-danger"></span>
     </div>
-    
-    @* <div class="col-md-4"> *@
-    @*     <label for="inputState" class="form-label">State</label> *@
-    @*     <select id="inputState" class="form-select"> *@
-    @*         <option selected>Choose...</option> *@
-    @*         <option>...</option> *@
-    @*     </select> *@
-    @* </div> *@
    
     <div class="col-6">
         <a asp-action="Index" class="btn btn-dark w-100">Back</a>

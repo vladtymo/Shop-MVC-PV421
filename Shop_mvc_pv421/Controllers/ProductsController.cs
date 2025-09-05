@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Shop_mvc_pv421.Models;
 using Shop_mvc_pv421.Extensions;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Shop_mvc_pv421.Controllers
 {
@@ -30,6 +31,7 @@ namespace Shop_mvc_pv421.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            SetCategoriesToViewBag();
             return View();
         }
         
@@ -38,6 +40,7 @@ namespace Shop_mvc_pv421.Controllers
         {
             if (!ModelState.IsValid)
             {
+                SetCategoriesToViewBag();
                 return View();
             }
 
@@ -92,6 +95,12 @@ namespace Shop_mvc_pv421.Controllers
             TempData.Set(WebConstants.ToastMessage, new ToastModel("Product deleted successfully!"));
 
             return RedirectToAction("Index");
+        }
+
+        private void SetCategoriesToViewBag()
+        {
+            var categories = new SelectList(ctx.Categories.ToList(), "Id", "Name");
+            ViewBag.Categories = categories;
         }
     }
 }
