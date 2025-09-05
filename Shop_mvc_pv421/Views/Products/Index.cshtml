@@ -58,7 +58,7 @@
                 </td>
                 <td>
                     <div class="btn-group" role="group">
-                        <a data-bs-id=@i.Id data-bs-toggle="modal" data-bs-target="#@editDialogId" class="btn btn-outline-warning">Edit</a>
+                        <a asp-action="Edit" asp-route-id="@i.Id" class="btn btn-outline-warning">Edit</a>
                         <a data-bs-id=@i.Id data-bs-toggle="modal" data-bs-target="#@delDialogId" class="btn btn-outline-danger">Delete</a>
                     </div>
                 </td>
@@ -80,16 +80,16 @@
          Message = "Do you want to delete the product?",
          Title = "Delete Confirmation" }) />
 
-<partial name="_ConfirmModalDialogPartial" model=@(new ConfirmDialogModel() {
+@* <partial name="_ConfirmModalDialogPartial" model=@(new ConfirmDialogModel() {
          DialogId = editDialogId,
          Mode = DialogType.warning,
          Message = "Do you want to edit the product?",
-         Title = "Edit Confirmation" }) />
+         Title = "Edit Confirmation" }) /> *@
 
 @section Scripts
 {
     <script>
         configConfirmModal('@delDialogId', '/products/delete/');
-        configConfirmModal('@editDialogId', '/products/edit/');
+        // configConfirmModal('@editDialogId', '/products/edit/');
     </script>
 }
