@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop_mvc_pv421.Data;
 using Shop_mvc_pv421.Data.Entities;
+using static System.Net.Mime.MediaTypeNames;
+using System.Collections.Generic;
+using System.Reflection;
+using Shop_mvc_pv421.Models;
+using Shop_mvc_pv421.Extensions;
 
 namespace Shop_mvc_pv421.Controllers
 {
@@ -37,7 +43,16 @@ namespace Shop_mvc_pv421.Controllers
 
             ctx.Products.Add(product);
             ctx.SaveChanges();
-            
+
+            // Passing data from controller to view:
+            // 1. ViewData → dictionary(string keys) for passing data from controller to view(current request only).
+            // 1. ViewBag → same as ViewData but has strong typing.
+            // 3. TempData → dictionary that persists data across redirects, survives until read(next request).
+
+            // send toast message to the view
+            //TempData[WebConstants.ToastMessage] = new ToastModel("Product created successfully!");
+            TempData.Set(WebConstants.ToastMessage, new ToastModel("Product created successfully!"));
+
             return RedirectToAction("Index");
         }
 
@@ -61,6 +76,8 @@ namespace Shop_mvc_pv421.Controllers
             ctx.Products.Update(product);
             ctx.SaveChanges();
 
+            TempData.Set(WebConstants.ToastMessage, new ToastModel("Product updated successfully!"));
+
             return RedirectToAction("Index");
         }
 
@@ -71,6 +88,8 @@ namespace Shop_mvc_pv421.Controllers
 
             ctx.Products.Remove(product);
             ctx.SaveChanges(); // submit changes to DB
+
+            TempData.Set(WebConstants.ToastMessage, new ToastModel("Product deleted successfully!"));
 
             return RedirectToAction("Index");
         }
