@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@* @{
+    var cartService = new CartService();
+} *@
+@inject ICartService cartService
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,7 +38,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Cart (0)</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">
+                                Cart (@cartService.GetCartSize(Context))
+                            </a>
                         </li>
                     </ul>
                 </div>

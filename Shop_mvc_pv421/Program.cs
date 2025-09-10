@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Shop_mvc_pv421.Data;
+using Shop_mvc_pv421.Interfaces;
+using Shop_mvc_pv421.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,8 @@ string connStr = builder.Configuration.GetConnectionString("RemoteDb")
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddDbContext<ShopDbContext>(options =>
     options.UseSqlServer(connStr));
