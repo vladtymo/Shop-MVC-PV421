@@ -38,9 +38,17 @@ namespace Shop_mvc_pv421.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // TODO: implement remove
         public ActionResult Remove()
         {
             return View();
+        }
+
+        public ActionResult Clear()
+        {
+            HttpContext.Session.Remove("CartItems");
+
+            return RedirectToAction("Index");
         }
     }
 }
