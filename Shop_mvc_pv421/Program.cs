@@ -10,6 +10,7 @@ string connStr = builder.Configuration.GetConnectionString("RemoteDb")
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<ICartService, CartService>();
 

@@ -2,51 +2,40 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop_mvc_pv421.Data;
 using Shop_mvc_pv421.Extensions;
+using Shop_mvc_pv421.Interfaces;
 
 namespace Shop_mvc_pv421.Controllers
 {
     public class CartController : Controller
     {
         private readonly ShopDbContext ctx;
+        private readonly ICartService cartService;
 
-        public CartController(ShopDbContext ctx)
+        public CartController(ShopDbContext ctx, ICartService cartService)
         {
             this.ctx = ctx;
+            this.cartService = cartService;
         }
         // GET: Cart
         public ActionResult Index()
         {
-            var existingIds = HttpContext.Session.Get<List<int>>("CartItems") ?? new List<int>();
+            var items = cartService.GetProducts();
 
-            var items = ctx.Products
-                .Include(x => x.Category)
-                .Where(x => existingIds.Contains(x.Id))
-                .ToList();
-            
             return View(items);
         }
         
         public ActionResult Add(int id) // 3, 5
         {
-            var existingIds = HttpContext.Session.Get<List<int>>("CartItems");
-            List<int> ids = existingIds ?? new();
-            
-            ids.Add(id);
-
-            HttpContext.Session.Set("CartItems", ids);
+            cartService.Add(id);
             
             return RedirectToAction("Index", "Home");
         }
 
         // TODO: implement remove
-        public ActionResult Remove()
-        {
-            return View();
-        }
 
         public ActionResult Clear()
         {
-            HttpContext.Session.Remove("CartItems");
+            cartService.Clear();
 
             return RedirectToAction("Index");
         }

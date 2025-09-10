@@ -1,7 +1,14 @@
-﻿namespace Shop_mvc_pv421.Interfaces
+﻿using Shop_mvc_pv421.Data.Entities;
+
+namespace Shop_mvc_pv421.Interfaces
 {
     public interface ICartService
     {
-        int GetCartSize(HttpContext httpContext);
+        List<int> GetItemIds();
+        List<Product> GetProducts();
+
+        void Add(int id);
+        void Clear();
+        int GetCartSize();
     }
 }
