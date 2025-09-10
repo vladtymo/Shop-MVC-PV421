@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop_mvc_pv421.Data;
 using Shop_mvc_pv421.Data.Entities;
-using static System.Net.Mime.MediaTypeNames;
-using System.Collections.Generic;
 using System.Reflection;
 using Shop_mvc_pv421.Models;
 using Shop_mvc_pv421.Extensions;
