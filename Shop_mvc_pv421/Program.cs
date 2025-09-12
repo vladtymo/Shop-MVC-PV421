@@ -3,6 +3,7 @@ using Shop_mvc_pv421.Data;
 using Shop_mvc_pv421.Interfaces;
 using Shop_mvc_pv421.Services;
 using Microsoft.AspNetCore.Identity;
+using Shop_mvc_pv421.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddDbContext<ShopDbContext>(options =>
     options.UseSqlServer(connStr));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+builder.Services.AddDefaultIdentity<User>(options => 
     options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ShopDbContext>();
 

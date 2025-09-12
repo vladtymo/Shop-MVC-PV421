@@ -4,7 +4,7 @@ using Shop_mvc_pv421.Data.Entities;
 
 namespace Shop_mvc_pv421.Data
 {
-    public class ShopDbContext : IdentityDbContext
+    public class ShopDbContext : IdentityDbContext<User>
     {
         public ShopDbContext() {
             //Database.EnsureCreated();
