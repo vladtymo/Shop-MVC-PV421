@@ -12,6 +12,8 @@ namespace Shop_mvc_pv421.Data
         public ShopDbContext(DbContextOptions<ShopDbContext> options) : base(options) { }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
