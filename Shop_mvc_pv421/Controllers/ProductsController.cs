@@ -7,6 +7,7 @@ using System.Reflection;
 using Shop_mvc_pv421.Models;
 using Shop_mvc_pv421.Extensions;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Shop_mvc_pv421.Controllers
 {
@@ -32,7 +33,8 @@ namespace Shop_mvc_pv421.Controllers
             SetCategoriesToViewBag();
             return View();
         }
-        
+
+        [Authorize]
         [HttpPost]
         public IActionResult Create(Product product)
         {
@@ -82,6 +84,7 @@ namespace Shop_mvc_pv421.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = Roles.ADMIN)]
         public IActionResult Delete(int id)
         {
             var product = ctx.Products.Find(id);
