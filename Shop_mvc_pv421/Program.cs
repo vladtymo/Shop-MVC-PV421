@@ -4,6 +4,7 @@ using Shop_mvc_pv421.Interfaces;
 using Shop_mvc_pv421.Services;
 using Microsoft.AspNetCore.Identity;
 using Shop_mvc_pv421.Data.Entities;
+using Shop_mvc_pv421.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +20,10 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddDbContext<ShopDbContext>(options =>
     options.UseSqlServer(connStr));
 
-builder.Services.AddDefaultIdentity<User>(options => 
+builder.Services.AddIdentity<User, IdentityRole>(options => 
     options.SignIn.RequireConfirmedAccount = false)
+    .AddDefaultUI()
+    .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<ShopDbContext>();
 
 builder.Services.AddDistributedMemoryCache();
@@ -33,6 +36,13 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
+
+// seed initial roles and admin user
+using (var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.SeedRolesAsync().Wait();
+    scope.ServiceProvider.SeedAdminAsync().Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
