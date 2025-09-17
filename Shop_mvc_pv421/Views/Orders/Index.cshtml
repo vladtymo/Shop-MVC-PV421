@@ -5,6 +5,6 @@
 <ul class="list-group">
     @foreach(var i in Model)
     {
-        <li class="list-group-item">#@i.Id - @i.TotalPrice$ made by ... at @i.Date.ToString()</li>
+        <li class="list-group-item">#@i.Id - @i.TotalPrice$ made by @i.User?.UserName at @i.Date.ToString()</li>
     }
 </ul>

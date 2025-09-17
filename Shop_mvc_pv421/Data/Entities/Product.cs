@@ -23,5 +23,7 @@ namespace Shop_mvc_pv421.Data.Entities
 
         // ----- navigation properties
         public Category? Category { get; set; }
+        public ICollection<OrderDetails>? Orders { get; set; }
+
     }
 }

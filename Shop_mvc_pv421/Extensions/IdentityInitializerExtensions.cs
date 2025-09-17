@@ -10,7 +10,7 @@ namespace Shop_mvc_pv421.Extensions
         public const string USER = "user";
     }
 
-    public static class DbSeedExtensions
+    public static class IdentityInitializerExtensions
 {
         public static async Task SeedRolesAsync(this IServiceProvider app)
         {

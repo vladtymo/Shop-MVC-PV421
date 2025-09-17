@@ -33,7 +33,7 @@
                     <a href="#">@i.Title</a>
                 </td>
                 <td>
-                    @if (i.Discount > 0)
+                    @if (i.Discount > 0)    
                     {
                         <span class="text-decoration-line-through">@i.Price$</span>
                         <span class="ms-1">@((i.Price * (100 - i.Discount)) / 100)$</span>

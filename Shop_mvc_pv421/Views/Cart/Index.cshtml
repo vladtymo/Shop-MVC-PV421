@@ -39,7 +39,7 @@
         <div class="mt-3">
             @if (!isEmpty)
             {
-                <a class="btn btn-success">Confirm</a>
+                <a asp-controller="Orders" asp-action="Add" class="btn btn-success">Confirm</a>
             }
             <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Continue Shopping</a>
         </div>
