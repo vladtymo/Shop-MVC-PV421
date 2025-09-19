@@ -5,6 +5,7 @@ using Shop_mvc_pv421.Services;
 using Microsoft.AspNetCore.Identity;
 using Shop_mvc_pv421.Data.Entities;
 using Shop_mvc_pv421.Extensions;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,13 @@ string connStr = builder.Configuration.GetConnectionString("RemoteDb")
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 
+// DI service lifetime
+// - transient
+// - scoped
+// - singleton
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IViewRender, ViewRender>();
 
 builder.Services.AddDbContext<ShopDbContext>(options =>
     options.UseSqlServer(connStr));
@@ -25,6 +32,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     .AddDefaultUI()
     .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<ShopDbContext>();
+
 
 builder.Services.AddDistributedMemoryCache();
 
