@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shop_mvc_pv421.Data.Entities;
+﻿using DataAccess.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace Shop_mvc_pv421.Data
+namespace DataAccess.Data
 {
     public static class DbInitializer
     {

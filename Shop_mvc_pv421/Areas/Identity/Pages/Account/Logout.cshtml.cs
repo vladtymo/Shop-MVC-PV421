@@ -4,12 +4,12 @@
 
 using System;
 using System.Threading.Tasks;
+using DataAccess.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Shop_mvc_pv421.Data.Entities;
 
 namespace Shop_mvc_pv421.Areas.Identity.Pages.Account
 {

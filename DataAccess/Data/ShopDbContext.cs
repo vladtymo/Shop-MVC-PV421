@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Shop_mvc_pv421.Data.Entities;
 
-namespace Shop_mvc_pv421.Data
+namespace DataAccess.Data
 {
     public class ShopDbContext : IdentityDbContext<User>
     {
-        public ShopDbContext() {
+        public ShopDbContext()
+        {
             //Database.EnsureCreated();
         }
         public ShopDbContext(DbContextOptions<ShopDbContext> options) : base(options) { }

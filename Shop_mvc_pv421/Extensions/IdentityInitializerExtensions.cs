@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Shop_mvc_pv421.Data.Entities;
+﻿using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 
 namespace Shop_mvc_pv421.Extensions

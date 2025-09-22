@@ -1,13 +1,13 @@
 ﻿using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shop_mvc_pv421.Data;
-using Shop_mvc_pv421.Data.Entities;
 using System.Reflection;
 using Shop_mvc_pv421.Models;
 using Shop_mvc_pv421.Extensions;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using DataAccess.Data.Entities;
+using DataAccess.Data;
 
 namespace Shop_mvc_pv421.Controllers
 {

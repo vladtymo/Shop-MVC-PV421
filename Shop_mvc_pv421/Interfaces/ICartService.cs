@@ -1,4 +1,4 @@
-﻿using Shop_mvc_pv421.Data.Entities;
+﻿using DataAccess.Data.Entities;
 
 namespace Shop_mvc_pv421.Interfaces
 {

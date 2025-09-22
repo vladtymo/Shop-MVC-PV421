@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Shop_mvc_pv421.Data;
 using Shop_mvc_pv421.Interfaces;
 using Shop_mvc_pv421.Services;
 using Microsoft.AspNetCore.Identity;
-using Shop_mvc_pv421.Data.Entities;
 using Shop_mvc_pv421.Extensions;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using DataAccess.Data.Entities;
+using DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

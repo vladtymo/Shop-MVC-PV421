@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DataAccess.Data;
+using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shop_mvc_pv421.Data;
-using Shop_mvc_pv421.Data.Entities;
 using Shop_mvc_pv421.Interfaces;
 using Shop_mvc_pv421.Models;
 using System.Security.Claims;

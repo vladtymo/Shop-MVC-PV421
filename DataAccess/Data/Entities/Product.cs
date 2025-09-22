@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shop_mvc_pv421.Data.Entities
+namespace DataAccess.Data.Entities
 {
     public class Product
     {

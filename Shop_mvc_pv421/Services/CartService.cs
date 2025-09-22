@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shop_mvc_pv421.Data;
-using Shop_mvc_pv421.Data.Entities;
+﻿using DataAccess.Data;
+using DataAccess.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Shop_mvc_pv421.Extensions;
 using Shop_mvc_pv421.Interfaces;
 
