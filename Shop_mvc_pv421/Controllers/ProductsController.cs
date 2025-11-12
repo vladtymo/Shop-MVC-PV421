@@ -8,16 +8,19 @@ using Shop_mvc_pv421.Models;
 using Shop_mvc_pv421.Extensions;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Shop_mvc_pv421.Interfaces;
 
 namespace Shop_mvc_pv421.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ShopDbContext ctx;
+        private readonly IFileService fileService;
 
-        public ProductsController(ShopDbContext ctx)
+        public ProductsController(ShopDbContext ctx, IFileService fileService)
         {
             this.ctx = ctx;
+            this.fileService = fileService;
         }
         public IActionResult Index()
         {
@@ -36,7 +39,7 @@ namespace Shop_mvc_pv421.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult Create(Product product)
+        public async Task<IActionResult> Create(CreateProductModel product)
         {
             if (!ModelState.IsValid)
             {
@@ -44,7 +47,16 @@ namespace Shop_mvc_pv421.Controllers
                 return View();
             }
 
-            ctx.Products.Add(product);
+            ctx.Products.Add(new Product()
+            {
+                Title = product.Title,
+                Description = product.Description,
+                ImageUrl = product.Image != null ? await fileService.SaveImage(product.Image) : null, // file -> url 
+                Price = product.Price,
+                Discount = product.Discount,
+                Quantity = product.Quantity,
+                CategoryId = product.CategoryId
+            });
             ctx.SaveChanges();
 
             // Passing data from controller to view:

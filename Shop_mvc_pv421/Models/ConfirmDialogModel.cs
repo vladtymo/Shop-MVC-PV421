@@ -1,4 +1,6 @@
-﻿namespace Shop_mvc_pv421.Models
+﻿using Shop_mvc_pv421.Data.Entities;
+
+namespace Shop_mvc_pv421.Models
 {
     public enum DialogType
     {

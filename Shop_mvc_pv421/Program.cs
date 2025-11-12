@@ -23,6 +23,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IViewRender, ViewRender>();
+builder.Services.AddScoped<IFileService, AzureBlobService>();
 
 builder.Services.AddDbContext<ShopDbContext>(options =>
     options.UseSqlServer(connStr));
