@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Shop_mvc_pv421.Data.Entities;
 using Shop_mvc_pv421.Extensions;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Runtime.ConstrainedExecution;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,7 @@ builder.Services.AddHttpContextAccessor();
 // - scoped
 // - singleton
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<ProductService>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IViewRender, ViewRender>();
 builder.Services.AddScoped<IFileService, AzureBlobService>();
@@ -43,6 +46,14 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+// setup hangfire
+builder.Services.AddHangfire(config =>
+{
+    config.UseSqlServerStorage(connStr);
+});
+
+builder.Services.AddHangfireServer();
 
 var app = builder.Build();
 
@@ -69,6 +80,13 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseSession();
+
+app.UseHangfireDashboard();
+
+RecurringJob.AddOrUpdate<ProductService>(
+                "CleanUp Storage",
+                (service) => service.CleanUpProductImages(),
+                Cron.Weekly(DayOfWeek.Monday, 3));
 
 app.MapControllerRoute(
     name: "default",

@@ -4,6 +4,7 @@ using Azure.Storage.Blobs.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Shop_mvc_pv421.Interfaces;
+using Shop_mvc_pv421.Data;
 
 namespace Shop_mvc_pv421.Services
 {
@@ -40,9 +41,43 @@ namespace Shop_mvc_pv421.Services
             return blob.Uri.ToString();
         }
 
+        public async Task DeleteProductImageExcept(string?[] exeptFiles)
+        {
+            var client = new BlobContainerClient(connectionString, containerName);
+            var blobs = client.GetBlobs();
+
+            var exeptUrls = exeptFiles.Select(x => Path.GetFileName(x)).ToArray();
+
+            foreach (var item in blobs)
+            {
+                if (exeptUrls.Contains(item.Name)) continue;
+
+                var blob = client.GetBlobClient(item.Name);
+                await blob.DeleteIfExistsAsync();
+            }
+        }
+
         public Task DeleteImage(string path)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class ProductService
+    {
+        private readonly ShopDbContext ctx;
+        private readonly IFileService fileService;
+
+        public ProductService(ShopDbContext ctx, IFileService fileService)
+        {
+            this.ctx = ctx;
+            this.fileService = fileService;
+        }
+
+        public async Task CleanUpProductImages()
+        {
+            var imagePaths = ctx.Products.Select(x => x.ImageUrl).ToArray();
+            await fileService.DeleteProductImageExcept(imagePaths);
         }
     }
 }

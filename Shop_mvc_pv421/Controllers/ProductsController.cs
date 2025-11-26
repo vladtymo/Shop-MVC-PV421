@@ -9,6 +9,7 @@ using Shop_mvc_pv421.Extensions;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Shop_mvc_pv421.Interfaces;
+using Shop_mvc_pv421.Services;
 
 namespace Shop_mvc_pv421.Controllers
 {
