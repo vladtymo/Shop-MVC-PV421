@@ -4,7 +4,6 @@ using Azure.Storage.Blobs.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Shop_mvc_pv421.Interfaces;
-using Shop_mvc_pv421.Data;
 
 namespace Shop_mvc_pv421.Services
 {
@@ -60,24 +59,6 @@ namespace Shop_mvc_pv421.Services
         public Task DeleteImage(string path)
         {
             throw new NotImplementedException();
-        }
-    }
-
-    public class ProductService
-    {
-        private readonly ShopDbContext ctx;
-        private readonly IFileService fileService;
-
-        public ProductService(ShopDbContext ctx, IFileService fileService)
-        {
-            this.ctx = ctx;
-            this.fileService = fileService;
-        }
-
-        public async Task CleanUpProductImages()
-        {
-            var imagePaths = ctx.Products.Select(x => x.ImageUrl).ToArray();
-            await fileService.DeleteProductImageExcept(imagePaths);
         }
     }
 }
